@@ -40,7 +40,7 @@
             <br/>
             <div class="row">
                 <form class="col s6 offset-s3 card-panel z-depth-3" id="wordCard">
-                    <h3 class="center-align"><img class="responsive-img" width="32" height="32" src="img/posneg.svg"> Check a Word!</h3>
+                    <h3 class="center-align"><img class="responsive-img" width="32" height="32" src="img/posneg.svg" style="vertical-align: middle"> Check a Word!</h3>
                     <div class="col s12">
                         <div class="row">
                             <div class="input-field col s12">
@@ -53,7 +53,7 @@
                         </div>
                         <div class="row">
                             <div id="wordResultDisplay" style="font-size:24px;" class="center-align">
-                                <strong><span id="resultWord">Welcome!</span></strong> is <span id="wordResultType" style="font-family: 'Courier New',monospace;font-weight:bold;color:green;">positive</span>!
+                                <img class="responsive-img" id="wordImg" width="24" height="24" src="img/pos.svg" style="vertical-align: middle"> <strong><span id="resultWord">Welcome!</span></strong> is <span id="wordResultType" style="font-family: 'Courier New',monospace;font-weight:bold;color:green;">positive</span>!
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
             <br/>
             <div class="row">
                 <form class="col s8 offset-s2 card-panel z-depth-3" id="sentenceCard">
-                    <h3 class="center-align"><img class="responsive-img" width="32" height="32" src="img/posneg.svg"> Check a Sentence!</h3>
+                    <h3 class="center-align"><img class="responsive-img" width="32" height="32" src="img/posneg.svg" style="vertical-align: middle"> Check a Sentence!</h3>
                     <div class="col s12">
                         <div class="row">
                             <div class="input-field col s12">
@@ -76,17 +76,19 @@
                         </div>
                         <div class="row">
                             <div id="sentenceResultDisplay" style="font-size:24px;" class="center-align">
-                                Your sentence is <span id="sentenceResultType" style="font-family: 'Courier New',monospace;font-weight:bold;color:green;">positive</span>!
+                                <img class="responsive-img" id="sentenceImg" width="24" height="24" src="img/pos.svg" style="vertical-align: middle"> Your sentence is <span id="sentenceResultType" style="font-family: 'Courier New',monospace;font-weight:bold;color:green;">positive</span>!
                             </div>
                             <div id="sentenceDetails" style="display:none;font-size:18px;font-family: 'Courier New',monospace;font-weight:bold;">
                                 <br/>
                                 <div class="col s6 right-align">
-                                    <span id="sentencePositivity"></span>% <span style="color:green;">positive</span><br/>
-                                    <span id="positiveWords"></span> words
+                                    <img class="responsive-img" width="18" height="18" src="img/pos.svg" style="vertical-align: middle"> <span id="sentencePositivity"></span>% <span style="color:green;">positive</span><br/>
+                                    <span id="positiveWords"></span> words<br/>
+                                    <span id="positiveWordList" style="font-size:12px"></span><br/>
                                 </div>
                                 <div class="col s6">
-                                    <span id="sentenceNegativity"></span>% <span style="color:red;">negative</span><br/>
-                                    <span id="negativeWords"></span> words
+                                    <span id="sentenceNegativity"></span>% <span style="color:red;">negative</span> <img class="responsive-img" width="18" height="18" src="img/neg.svg" style="vertical-align: middle"><br/>
+                                    <span id="negativeWords"></span> words<br/>
+                                    <span id="negativeWordList" style="font-size:12px"></span><br/>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +103,7 @@
             <h2 class="center-align" style="font-family: 'Courier New',monospace;">About</h2>
 
             <p style="font-size:16px;">
-                This API provides endpoints to easily determine the <strong>sentiment</strong> of a word or a sentence.<br/>
+                This API provides endpoints to easily determine the <strong>sentiment</strong> of a word or a sentence. Of course, you can also use the forms above to check manually.<br/>
                 The data used to check individual words has been taken from <a href="dataCredits.txt" target="_blank">various research projects</a> and currently contains about 50,000 words.<br/>
             </p>
             <br/>
@@ -112,18 +114,18 @@
 
             <div class="card">
                 <div class="card-content">
-                        <span class="card-title"><span style="font-family: 'Courier New',monospace;">/word</span> Endpoint</span>
-                        <p>
-                            Check if a single word is <span style="color:green;">positive</span> or <span style="color:red">negative</span>
-                        </p>
-                        <div>
-                            <pre>POST https://posneg.inventivetalent.org/word</pre>
-                            <pre>
+                    <span class="card-title"><span style="font-family: 'Courier New',monospace;">/word</span> Endpoint</span>
+                    <p>
+                        Check if a single word is <span style="color:green;">positive</span> or <span style="color:red">negative</span>
+                    </p>
+                    <div>
+                        <pre>POST https://posneg.inventivetalent.org/word</pre>
+                        <pre>
 {
   "word": "YourWordHere"
 }
                 </pre>
-                            <pre>
+                        <pre>
 {
   "word": "YourWordHere",
   "positive": true|false,
@@ -131,11 +133,11 @@
   "type": -1|0|1 // negative|neutral|positive
 }
                 </pre>
-                        </div>
+                    </div>
 
-                        <div class="card-action">
-                            <a href="https://apitester.com/shared/checks/2f0922b144bd402badc5d665ef660fd6" target="_blank">Try it!</a>
-                        </div>
+                    <div class="card-action">
+                        <a href="https://apitester.com/shared/checks/2f0922b144bd402badc5d665ef660fd6" target="_blank">Try it!</a>
+                    </div>
                 </div>
             </div>
             <br/>
@@ -170,9 +172,9 @@
                 </pre>
                     </div>
 
-                   <div class="card-action">
-                       <a href="https://apitester.com/shared/checks/750fe4d57650430d98591e53f63443a9" target="_blank">Try it!</a>
-                   </div>
+                    <div class="card-action">
+                        <a href="https://apitester.com/shared/checks/750fe4d57650430d98591e53f63443a9" target="_blank">Try it!</a>
+                    </div>
                 </div>
             </div>
             <br/>
@@ -228,7 +230,8 @@
                     }).done(function (data) {
                         $("#resultWord").text(data.word);
                         $("#wordResultType").text(data.type === 1 ? "positive" : data.type === -1 ? "negative" : "neutral");
-                        $("#wordResultType").css({color: data.type === 1 ? "green" : data.type === -1 ? "red" : "blue"})
+                        $("#wordResultType").css({color: data.type === 1 ? "green" : data.type === -1 ? "red" : "blue"});
+                        $("#wordImg").attr("src", data.type === 1 ? "img/pos.svg" : data.type === -1 ? "img/neg.svg" : "img/posneg.svg");
 
                         $("#wordProgress").css("visibility", "hidden");
                     })
@@ -245,13 +248,23 @@
                     }).done(function (data) {
                         $("#sentenceResultType").text(data.type === 1 ? "positive" : data.type === -1 ? "negative" : "neutral");
                         $("#sentenceResultType").css({color: data.type === 1 ? "green" : data.type === -1 ? "red" : "blue"})
+                        $("#sentenceImg").attr("src", data.type === 1 ? "img/pos.svg" : data.type === -1 ? "img/neg.svg" : "img/posneg.svg");
 
-
-                        $("#sentencePositivity").text(Number(data.positivity).toFixed(2) * 100);
-                        $("#sentenceNegativity").text(Number(data.negativity).toFixed(2) * 100);
+                        $("#sentencePositivity").text(Math.round(Number(data.positivity).toFixed(2) * 100));
+                        $("#sentenceNegativity").text(Math.round(Number(data.negativity).toFixed(2) * 100));
 
                         $("#positiveWords").text(data.wordsPositive);
                         $("#negativeWords").text(data.wordsNegative);
+
+                        $("#positiveWordList").empty();
+                        $("#negativeWordList").empty();
+                        for (let key in data.types) {
+                            if (data.types[key] === 1) {
+                                $("#positiveWordList").append(key + "<br/>")
+                            } else if (data.types[key] === -1) {
+                                $("#negativeWordList").append(key + "<br/>")
+                            }
+                        }
 
                         $("#sentenceDetails").show();
                         $("#sentenceProgress").css("visibility", "hidden");
