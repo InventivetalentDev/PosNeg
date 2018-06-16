@@ -229,7 +229,7 @@
                         data: {word: word}
                     }).done(function (data) {
                         $("#resultWord").text(data.word);
-                        $("#wordResultType").text(data.type === 1 ? "positive" : data.type === -1 ? "negative" : "neutral");
+                        $("#wordResultType").html(data.type === 1 ? "positive" : data.type === -1 ? "negative" : "&nbsp;neutral");
                         $("#wordResultType").css({color: data.type === 1 ? "green" : data.type === -1 ? "red" : "blue"});
                         $("#wordImg").attr("src", data.type === 1 ? "img/pos.svg" : data.type === -1 ? "img/neg.svg" : "img/posneg.svg");
 
@@ -246,7 +246,7 @@
                         method: "POST",
                         data: {sentence: sentence}
                     }).done(function (data) {
-                        $("#sentenceResultType").text(data.type === 1 ? "positive" : data.type === -1 ? "negative" : "neutral");
+                        $("#sentenceResultType").html(data.type === 1 ? "positive" : data.type === -1 ? "negative" : "&nbsp;neutral");
                         $("#sentenceResultType").css({color: data.type === 1 ? "green" : data.type === -1 ? "red" : "blue"})
                         $("#sentenceImg").attr("src", data.type === 1 ? "img/pos.svg" : data.type === -1 ? "img/neg.svg" : "img/posneg.svg");
 
