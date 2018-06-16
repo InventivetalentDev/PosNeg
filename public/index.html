@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PosNeg - Sentiment check</title>
+        <link rel="shortcut icon" href="favicon.ico"/>
+
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="keywords" content="sentiment,positive,negative,word">
+        <meta name="description" content="API to determine the sentiment of words and sentences">
+        <meta name="author" content="Haylee Schäfer">
+
+        <!-- OG -->
+        <meta property="og:title" content="PosNeg - Sentiment check">
+        <meta property="og:site_name" content="PosNeg - Sentiment check">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="https://posneg.inventivetalent.org/img/posneg_512.png">
+        <meta property="og:description" content="API to determine the sentiment of words and sentences">
+        <meta property="og:url" content="https://posneg.inventivetalent.org">
+        <!-- Twitter -->
+        <meta name="twitter:title" content="PosNeg - Sentiment check">
+        <meta name="twitter:description" content="API to determine the sentiment of words and sentences">
+        <meta name="twitter:url" content="https://posneg.inventivetlent.org">
+        <meta name="twitter:image" content="https://posneg.inventivetalent.org/img/posneg_512.png">
+        <meta name="twitter:creator" content="@Inventivtalent">
+        <meta name="twitter:card" content="summary">
+        <meta name="robots" content="index, follow">
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" integrity="sha256-e22BQKCF7bb/h/4MFJ1a4lTRR2OuAe8Hxa/3tgU5Taw=" crossorigin="anonymous"/>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <div class="container">
+            <br/>
+            <br/>
+            <div class="row">
+                <form class="col s6 offset-s3 card-panel z-depth-3" id="wordCard">
+                    <h3 class="center-align"><img class="responsive-img" width="32" height="32" src="img/posneg.svg"> Check a Word!</h3>
+                    <div class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input placeholder="Type a Word!" id="wordInput" type="text" value="Welcome!" minlength="1" validate>
+                                <label for="wordInput">Type a Word</label>
+                            </div>
+                            <div class="progress" id="wordProgress" style="visibility: hidden">
+                                <div class="indeterminate"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="wordResultDisplay" style="font-size:24px;" class="center-align">
+                                <strong><span id="resultWord">Welcome!</span></strong> is <span id="wordResultType" style="font-family: 'Courier New',monospace;font-weight:bold;color:green;">positive</span>!
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <br/>
+            <br/>
+            <div class="row">
+                <form class="col s8 offset-s2 card-panel z-depth-3" id="sentenceCard">
+                    <h3 class="center-align"><img class="responsive-img" width="32" height="32" src="img/posneg.svg"> Check a Sentence!</h3>
+                    <div class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input placeholder="Type a Sentence!" id="sentenceInput" type="text" value="Hello there!" minlength="1" validate>
+                                <label for="sentenceInput">Type a Sentence</label>
+                            </div>
+                            <div class="progress" id="sentenceProgress" style="visibility: hidden">
+                                <div class="indeterminate"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="sentenceResultDisplay" style="font-size:24px;" class="center-align">
+                                Your sentence is <span id="sentenceResultType" style="font-family: 'Courier New',monospace;font-weight:bold;color:green;">positive</span>!
+                            </div>
+                            <div id="sentenceDetails" style="display:none;font-size:18px;font-family: 'Courier New',monospace;font-weight:bold;">
+                                <br/>
+                                <div class="col s6 right-align">
+                                    <span id="sentencePositivity"></span>% <span style="color:green;">positive</span><br/>
+                                    <span id="positiveWords"></span> words
+                                </div>
+                                <div class="col s6">
+                                    <span id="sentenceNegativity"></span>% <span style="color:red;">negative</span><br/>
+                                    <span id="negativeWords"></span> words
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <br/>
+            <br/>
+        </div>
+        <div class="divider"></div>
+        <div class="container">
+            <h2 class="center-align" style="font-family: 'Courier New',monospace;">About</h2>
+
+            <p style="font-size:16px;">
+                This API provides endpoints to easily determine the <strong>sentiment</strong> of a word or a sentence.<br/>
+                The data used to check individual words has been taken from <a href="dataCredits.txt" target="_blank">various research projects</a> and currently contains about 50,000 words.<br/>
+            </p>
+            <br/>
+        </div>
+        <div class="divider"></div>
+        <div class="container">
+            <h2 class="center-align" style="font-family: 'Courier New',monospace;">API</h2>
+
+            <div class="card">
+                <div class="card-content">
+                        <span class="card-title"><span style="font-family: 'Courier New',monospace;">/word</span> Endpoint</span>
+                        <p>
+                            Check if a single word is <span style="color:green;">positive</span> or <span style="color:red">negative</span>
+                        </p>
+                        <div>
+                            <pre>POST https://posneg.inventivetalent.org/word</pre>
+                            <pre>
+{
+  "word": "YourWordHere"
+}
+                </pre>
+                            <pre>
+{
+  "word": "YourWordHere",
+  "positive": true|false,
+  "negative": true|false,
+  "type": -1|0|1 // negative|neutral|positive
+}
+                </pre>
+                        </div>
+
+                        <div class="card-action">
+                            <a href="https://apitester.com/shared/checks/2f0922b144bd402badc5d665ef660fd6" target="_blank">Try it!</a>
+                        </div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title"><span style="font-family: 'Courier New',monospace;">/sentence</span> Endpoint</span>
+                    <p>
+                        Check what percentage of a sentence is <span style="color:green;">positive</span> or <span style="color:red">negative</span>
+                    </p>
+                    <div>
+                        <pre>POST https://posneg.inventivetalent.org/sentence</pre>
+                        <pre>
+{
+  "sentence": "Your sentence here"
+}
+                </pre>
+                        <pre>
+{
+  "wordsTotal": 3,
+  "wordsPositive": 2,
+  "wordsNegative": 1,
+  "positivity": 0.66,
+  "negativity": 0.33,
+  "type": -1|0|1, // negative|neutral|positive
+  "types": {
+    "your": 1,
+    "sentence": -1,
+    "here": 1
+  }
+}
+                </pre>
+                    </div>
+
+                   <div class="card-action">
+                       <a href="https://apitester.com/shared/checks/750fe4d57650430d98591e53f63443a9" target="_blank">Try it!</a>
+                   </div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js" integrity="sha256-uWtSXRErwH9kdJTIr1swfHFJn/d/WQ6s72gELOHXQGM=" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function () {
+                $("#wordInput").on("keypress", function (e) {
+                    if (e.which === 32) {// Disable space key
+                        return false;
+                    }
+                });
+
+                $("#wordCard").on("submit", function (e) {
+                    e.preventDefault();
+                    checkWord();
+                });
+                $("#sentenceCard").on("submit", function (e) {
+                    e.preventDefault();
+                    checkSentence();
+                })
+
+                let wordTypingTimer;
+                $("#wordInput").on("keyup", function () {
+                    clearTimeout(wordTypingTimer);
+                    wordTypingTimer = setTimeout(checkWord, 300);
+                });
+                $("#wordInput").on("keydown", function () {
+                    clearTimeout(wordTypingTimer);
+                });
+
+                let sentenceTypingTimer;
+                $("#sentenceInput").on("keyup", function () {
+                    clearTimeout(sentenceTypingTimer);
+                    sentenceTypingTimer = setTimeout(checkSentence, 300);
+                });
+                $("#sentenceInput").on("keydown", function () {
+                    clearTimeout(sentenceTypingTimer);
+                });
+
+                function checkWord() {
+                    let word = $("#wordInput").val();
+                    if (word.length === 0) return;
+                    $("#wordProgress").css("visibility", "visible");
+                    $.ajax({
+                        url: "https://posneg.inventivetalent.org/word",
+                        method: "POST",
+                        data: {word: word}
+                    }).done(function (data) {
+                        $("#resultWord").text(data.word);
+                        $("#wordResultType").text(data.type === 1 ? "positive" : data.type === -1 ? "negative" : "neutral");
+                        $("#wordResultType").css({color: data.type === 1 ? "green" : data.type === -1 ? "red" : "blue"})
+
+                        $("#wordProgress").css("visibility", "hidden");
+                    })
+                }
+
+                function checkSentence() {
+                    let sentence = $("#sentenceInput").val();
+                    if (sentence.length === 0) return;
+                    $("#sentenceProgress").css("visibility", "visible");
+                    $.ajax({
+                        url: "https://posneg.inventivetalent.org/sentence",
+                        method: "POST",
+                        data: {sentence: sentence}
+                    }).done(function (data) {
+                        $("#sentenceResultType").text(data.type === 1 ? "positive" : data.type === -1 ? "negative" : "neutral");
+                        $("#sentenceResultType").css({color: data.type === 1 ? "green" : data.type === -1 ? "red" : "blue"})
+
+
+                        $("#sentencePositivity").text(Number(data.positivity).toFixed(2) * 100);
+                        $("#sentenceNegativity").text(Number(data.negativity).toFixed(2) * 100);
+
+                        $("#positiveWords").text(data.wordsPositive);
+                        $("#negativeWords").text(data.wordsNegative);
+
+                        $("#sentenceDetails").show();
+                        $("#sentenceProgress").css("visibility", "hidden");
+                    })
+                }
+            })
+        </script>
+    </body>
+</html>

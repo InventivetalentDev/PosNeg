@@ -1,0 +1,14 @@
+  http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html
+Minqing Hu and Bing Liu. "Mining and Summarizing Customer Reviews."
+   Proceedings of the ACM SIGKDD International Conference on Knowledge
+   Discovery and Data Mining (KDD-2004), Aug 22-25, 2004, Seattle,
+   Washington, USA,
+Bing Liu, Minqing Hu and Junsheng Cheng. "Opinion Observer: Analyzing
+   and Comparing Opinions on the Web." Proceedings of the 14th
+   International World Wide Web conference (WWW-2005), May 10-14,
+   2005, Chiba, Japan.
+    (https://gist.github.com/mkulakowski2/4289441 | https://gist.github.com/mkulakowski2/4289437)
+
+  SenticNet 4
+E. Cambria, S. Poria, R. Bajpai, and B. Schuller. SenticNet 4: A semantic resource for sentiment analysis based on conceptual primitives. In: COLING, pp. 2666-2677 (2016)
+    (http://sentic.net/downloads/)
